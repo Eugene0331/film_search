@@ -12,10 +12,10 @@ export const createElement = ({
 }) => {
   const el = document.createElement(type);
 
-  for (let key in attrs) {
+  for (let key in attrs)
     if (key !== "innerText") el.setAttribute(key, attrs[key]);
     else el.innerHTML = attrs[key];
-  }
+
   if (container && position === "append") container.append(el);
   if (container && position === "prepend") container.prepend(el);
   if (evt && handler) el.addEventListener(evt, handler);
@@ -29,36 +29,31 @@ export const createStyle = () => {
     attrs: {
       innerText: `
       * {
-        box-sizing: border-box;
+      box-sizing: border-box;
       }
-
       body {
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
       }
-
       .container {
         padding: 20px;
         max-width: 1280px;
         margin: 0 auto;
       }
       .movies {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
       }
-
       .movie {
         display: flex;
         align-content: center;
         justify-content: center;
       }
-
       .movie__image {
         width: 100%;
         object-fit: cover;
       }
-
       .search {
         margin-bottom: 30px;
       }
@@ -66,7 +61,6 @@ export const createStyle = () => {
         display: block;
         margin-bottom: 7px;
       }
-
       .search__input {
         display: block;
         padding: 10px 15px;
@@ -75,7 +69,7 @@ export const createStyle = () => {
         border-radius: 4px;
         margin-bottom: 10px;
       }
-      .search__label-checkbox {
+      .searach__label-checkbox {
         display: block;
         font-size: 12px;
         margin-top: -17px;
@@ -120,8 +114,9 @@ export const createMarkup = () => {
     type: "input",
     attrs: {
       class: "search__input",
-      type: "text",
-      placeholder: "Ввод текста",
+      for: "text",
+      innerText: "Поиск фильмов",
+      placeholder: "Введите текст",
       id: "search",
     },
     container: searchBox,
@@ -144,7 +139,7 @@ export const createMarkup = () => {
     attrs: {
       class: "search__label-checkbox",
       for: "checkbox",
-      innerText: "Добавлять фильмы к списку",
+      innerText: "Добавлять фильм к существующему списку",
     },
     container: searchBox,
   });
@@ -162,6 +157,7 @@ export const addMovieToList = (m) => {
     attrs: { class: "movie" },
     container: movieList,
   });
+
   createElement({
     type: "img",
     attrs: {

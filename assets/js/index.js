@@ -1,3 +1,3 @@
-import { appInit } from './movies.js';
+import { appInit } from "./movies.js";
 
-appInit('https://www.omdbapi.com/');
+appInit("https://www.omdbapi.com/");
