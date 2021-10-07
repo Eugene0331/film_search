@@ -20,26 +20,32 @@ const debounce = (() => {
   };
 })();
 
-const getData = (url) => fetch(url)
+const getData = (url) =>
+  fetch(url)
     .then((res) => res.json())
     .then((json) => {
-      if (!json || !json.Search) throw Error("Сервер не отвечает");
+      if (!json || !json.Search)
+        throw Error("Сервер вернул неправильный объект");
 
       return json.Search;
     });
 
 const inputSearchHandler = (e) => {
   debounce(() => {
-
     const searchString = e.target.value.trim();
 
-    if (searchString && searchString.length > 3 && searchString !== searchLast) {
+    if (
+      searchString &&
+      searchString.length > 3 &&
+      searchString !== searchLast
+    ) {
       if (!triggerMode) clearMovieMarkup();
 
-      getData(`${siteUrl}?s=${searchString}&apikey=f9678206`)
+      getData(`${siteUrl}?s=${searchString}&apikey=18b8609f`)
         .then((movies) => movies.forEach((movie) => addMovieToList(movie)))
         .catch((err) => console.log(err));
     }
+
     searchLast = searchString;
   }, 2000);
 };
