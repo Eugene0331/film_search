@@ -42,7 +42,7 @@ const inputSearchHandler = (e) => {
 
       getData(`${siteUrl}?s=${searchString}&apikey=18b8609f`)
         .then((movies) => movies.forEach((movie) => addMovieToList(movie)))
-        // .catch((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
     searchLast = searchString;
   }, 2000);
