@@ -1,6 +1,6 @@
 export let movieList = null;
 export let inputSearch = null;
-export let triggerMode = null;
+export let triggerMode = false;
 
 export const createElement = ({
   type,

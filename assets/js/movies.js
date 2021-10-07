@@ -20,8 +20,7 @@ const debounce = (() => {
   };
 })();
 
-const getData = (url) =>
-  fetch(url)
+const getData = (url) => fetch(url)
     .then((res) => res.json())
     .then((json) => {
       if (!json || !json.Search) throw Error("Сервер не отвечает");
@@ -31,6 +30,7 @@ const getData = (url) =>
 
 const inputSearchHandler = (e) => {
   debounce(() => {
+
     const searchString = e.target.value.trim();
 
     if (searchString && searchString.length > 3 && searchString !== searchLast) {
@@ -47,7 +47,7 @@ const inputSearchHandler = (e) => {
 export const appInit = (url) => {
   createStyle();
   createMarkup();
-  siteUrl = "http://www.omdbapi.com/";
+  siteUrl = "https://www.omdbapi.com/";
 
   inputSearch.addEventListener("keyup", inputSearchHandler);
 };
