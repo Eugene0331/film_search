@@ -1,33 +1,32 @@
 export let movieList = null;
 export let inputSearch = null;
-export let triggerMode = false;
+export let triggerMode = null;
 
 export const createElement = ({
   type,
   attrs,
   container = null,
-  position = 'append',
+  position = "append",
   evt = null,
-  handler = null
-  }) => {
+  handler = null,
+}) => {
   const el = document.createElement(type);
 
   for (let key in attrs) {
     if (key !== "innerText") el.setAttribute(key, attrs[key]);
     else el.innerHTML = attrs[key];
   }
-  if (container && position ==='append') container.append(el);
-  if (container && position ==='prepend') container.prepend(el);
-  if(evt && handler) el.addEventListener(evt, handler);
+  if (container && position === "append") container.append(el);
+  if (container && position === "prepend") container.prepend(el);
+  if (evt && handler) el.addEventListener(evt, handler);
 
   return el;
 };
 
 export const createStyle = () => {
-  createElement(
-    {type: "style",
-    attrs:
-    {
+  createElement({
+    type: "style",
+    attrs: {
       innerText: `
       * {
         box-sizing: border-box;
@@ -81,97 +80,99 @@ export const createStyle = () => {
         font-size: 12px;
         margin-top: -17px;
         margin-left: 25px;
-      }`
+      }`,
     },
-    container: document.head
+    container: document.head,
   });
 };
 
 export const createMarkup = () => {
   const container = createElement({
-    type:"div", 
-    attrs: { class: "container" }, 
-    container: document.body, 
-    position: 'prepend'});
+    type: "div",
+    attrs: { class: "container" },
+    container: document.body,
+    position: "prepend",
+  });
 
   createElement({
     type: "h1",
     attrs: { innerText: "Приложение для поиска фильмов" },
-    container
-    });
+    container,
+  });
 
-    const searchBox = createElement({
-      type: "div",
-      attrs: {class: "search"},
-      container
-    });
+  const searchBox = createElement({
+    type: "div",
+    attrs: { class: "search" },
+    container,
+  });
 
-    createElement({
-      type: "label",
-      attrs: {
-        class: "search__label-input",
-        for: "search",
-        innerText: "Поиск фильмов",
-      },
-      container: searchBox}
-    );
+  createElement({
+    type: "label",
+    attrs: {
+      class: "search__label-input",
+      for: "search",
+      innerText: "Поиск фильмов",
+    },
+    container: searchBox,
+  });
 
-    inputSearch = createElement({
-      type:"input",
-      attrs: {
-        class: "search__input",
-        type: "text",
-        placeholder: "Ввод текста",
-        id: "search",
-      },
-      container:searchBox
-    });
+  inputSearch = createElement({
+    type: "input",
+    attrs: {
+      class: "search__input",
+      type: "text",
+      placeholder: "Ввод текста",
+      id: "search",
+    },
+    container: searchBox,
+  });
 
-    createElement({
-      type:"input",
-      attrs:{
-        class: "search__checkbox",
-        id: "checkbox",
-        type: "checkbox",
-      },
-      container: searchBox,
-      evt: "click",
-      handler: () => triggerMode = !triggerMode
-    });
+  createElement({
+    type: "input",
+    attrs: {
+      class: "search__checkbox",
+      id: "checkbox",
+      type: "checkbox",
+    },
+    container: searchBox,
+    evt: "click",
+    handler: () => (triggerMode = !triggerMode),
+  });
 
-    createElement({
-      type:"label",
-      attrs: {
-        class: "search__label-checkbox",
-        for: "checkbox",
-        innerText: "Добавлять фильмы к списку",
-      },
-      container: searchBox
-    });
+  createElement({
+    type: "label",
+    attrs: {
+      class: "search__label-checkbox",
+      for: "checkbox",
+      innerText: "Добавлять фильмы к списку",
+    },
+    container: searchBox,
+  });
 
-    movieList =createElement({
-    type:"div",
+  movieList = createElement({
+    type: "div",
     attrs: { class: "movies" },
-    container
+    container,
   });
 };
-
 
 export const addMovieToList = (m) => {
   const item = createElement({
     type: "div",
     attrs: { class: "movie" },
-    container: movieList
+    container: movieList,
   });
   createElement({
-    type:"img",
-    attrs:{
+    type: "img",
+    attrs: {
       class: "movie__image",
-      src: /^(http|https):\/\//i.test(m.Poster) ? m.Poster : "assets/img/template_01.png",
+      src: /^(http|https):\/\//i.test(m.Poster)
+        ? m.Poster
+        : "assets/img/template_01.png",
       alt: m.Title,
       title: m.Title,
     },
-    container: item
+    container: item,
   });
 };
 

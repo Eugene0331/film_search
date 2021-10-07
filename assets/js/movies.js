@@ -33,14 +33,10 @@ const inputSearchHandler = (e) => {
   debounce(() => {
     const searchString = e.target.value.trim();
 
-    if (
-      searchString &&
-      searchString.length > 3 &&
-      searchString !== searchLast
-    ) {
+    if (searchString && searchString.length > 3 && searchString !== searchLast) {
       if (!triggerMode) clearMovieMarkup();
 
-      getData(`${siteUrl}?s=${searchString}&apikey=18b8609f`)
+      getData(`${siteUrl}?s=${searchString}&apikey=f9678206`)
         .then((movies) => movies.forEach((movie) => addMovieToList(movie)))
         .catch((err) => console.log(err));
     }
